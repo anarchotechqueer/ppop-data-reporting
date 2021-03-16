@@ -106,8 +106,8 @@ function App() {
         <Container>
           <Form form={form} layout="vertical" size="large" onFinish={onFinish}>
             <FormSection title="General Info">
-              <Form.Item name="outreachDate" label="date of outreach" rules={[{ required: true,},]} >
-                <DatePicker required format="MM/DD/YYYY" />
+              <Form.Item name="outreachDate" label="Date of outreach" rules={[{ required: true,},]} >
+                <DatePicker required format="MM/DD/YYYY" placeholder="Date of outreach" />
               </Form.Item>
 
               <Form.Item name="outreachType" label="Type of outreach" rules={[{ required: true,},]} >

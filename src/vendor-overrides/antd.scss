@@ -9,6 +9,27 @@
 .ant-form-item-label {
   > label {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
+  }
+}
+
+.ant-btn {
+  height: auto;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  padding: $space-half $space;
+}
+
+.ant-btn-primary {
+  background-color: $color-dark;
+  border-color: $color-dark;
+
+
+  &:hover,
+  &:focus {
+    background-color: $color-darker;
+    backround-color: $color-darker;
   }
 }

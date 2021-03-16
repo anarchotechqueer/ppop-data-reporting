@@ -1,0 +1,26 @@
+@import '../../variables';
+
+.section {
+  &:not(:first-child) {
+    margin-top: $space-double;
+  }
+
+  .title {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .content {
+    @media (min-width: $screen-wide) {
+      display: flex;
+      flex-wrap: wrap;
+
+      > * {
+        width: calc((100% - #{$space-big}) / 2);
+        &:nth-child(even) {
+          margin-left: $space-big;
+        }
+      }
+    }
+  }
+}

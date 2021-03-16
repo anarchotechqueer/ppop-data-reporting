@@ -1,0 +1,9 @@
+@import '../../variables';
+
+.container {
+  padding: $space-big $space-double;
+
+  @media (min-width: $screen-wide) {
+    padding: $space-big;
+  }
+}

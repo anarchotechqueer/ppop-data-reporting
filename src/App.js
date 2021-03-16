@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Button, Select, DatePicker, InputNumber, Alert } from 'antd';
 
 import { gapi } from "gapi-script";
@@ -36,7 +36,7 @@ function App() {
       'values': [submitValues] //convert the object's values to an array
     };
 
-    setShowLoadingScreen(true);
+
 
     let request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
     request.then(function (response) {
@@ -49,15 +49,6 @@ function App() {
       setAlert({'type': 'error', 'message': reason.result.error.message});
       setShowLoadingScreen(false);
     });
-  };
-
-  const handleClientLoad =()=> { //initialize the Google API
-    gapi.load('client:auth2', initClient);
-  }
-
-  const updateSignInStatus = (signedIn) => {
-    setIsSignedIn(signedIn);
-    setShowLoadingScreen(false);
   };
 
   const signInCTA = (e) => {
@@ -79,7 +70,12 @@ function App() {
     setAlert(null);
   }
 
-  const initClient =()=> { //provide the authentication credentials you set up in the Google developer console
+  const updateSignInStatus = (signedIn) => {
+    setIsSignedIn(signedIn);
+    setShowLoadingScreen(false);
+  };
+
+  const initClient = useCallback(()=> { //provide the authentication credentials you set up in the Google developer console
     gapi.client.init({
       'apiKey': process.env.REACT_APP_API_KEY,
       'clientId': process.env.REACT_APP_CLIENT_ID,
@@ -89,11 +85,15 @@ function App() {
       gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus); //add a function called `updateSignInStatus` if you want to do something once a user is logged in with Google
       updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     });
-  }
+  }, []);
+
+  const handleClientLoad = useCallback(() => { //initialize the Google API
+    gapi.load('client:auth2', initClient);
+  }, [initClient])
 
   useEffect(() => {
     handleClientLoad();
-  }, []);
+  }, [handleClientLoad]);
 
   return (
     <>

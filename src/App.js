@@ -41,7 +41,6 @@ function App() {
     }, function (reason) {
       console.error('error: ' + reason.result.error.message);
     });
-
   };
 
   const handleClientLoad =()=> { //initialize the Google API

@@ -8,12 +8,15 @@
   .title {
     font-size: 1.4rem;
     font-weight: 600;
+    margin-bottom: $space-half;
+    color: $color-darker;
   }
 
   .content {
     @media (min-width: $screen-wide) {
       display: flex;
       flex-wrap: wrap;
+      align-items: flex-end;
 
       > * {
         width: calc((100% - #{$space-big}) / 2);

@@ -9,7 +9,13 @@
 .ant-form-item-label {
   > label {
     font-size: 1rem;
-    font-weight: 600;
+    height: auto !important;
+    color: $color-dark;
+    align-items: baseline;
+
+    &.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+      color: $color-error;
+    }
   }
 }
 
@@ -26,10 +32,42 @@
   background-color: $color-dark;
   border-color: $color-dark;
 
-
   &:hover,
   &:focus {
     background-color: $color-darker;
     backround-color: $color-darker;
   }
+}
+
+.ant-alert-banner {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  padding: $space $space-double;
+}
+
+.ant-alert {
+  .ant-alert-message {
+    font-size: 1.2rem;
+    color: white;
+  }
+
+  .ant-alert-close-icon {
+    font-size: $space-med;
+    line-height: 1;
+
+    svg {
+      fill: white;
+    }
+  }
+}
+
+.ant-alert-success {
+  background-color: $color-success;
+}
+
+.ant-alert-error {
+  background-color: $color-error;
 }

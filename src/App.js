@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Select, DatePicker, InputNumber } from 'antd';
+import { Form, Button, Select, DatePicker, InputNumber, Alert } from 'antd';
+
 import { gapi } from "gapi-script";
 import Container from './components/container';
 import FormSection from './components/form-section';
@@ -10,6 +11,7 @@ const { Option } = Select;
 
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(null);
+  const [alert, setAlert] = useState(null);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -38,8 +40,13 @@ function App() {
     request.then(function (response) {
       // TODO: Insert desired response behaviour on submission
       console.log(response.result);
+      // form.resetFields();
+
+      setAlert({'type': 'success', 'message': 'Form submitted successfully'});
+
     }, function (reason) {
       console.error('error: ' + reason.result.error.message);
+      setAlert({'type': 'error', 'message': reason.result.error.message});
     });
   };
 
@@ -83,96 +90,102 @@ function App() {
   return (
     <>
     {isSignedIn && (
-      <Container>
-        <Form form={form} layout="vertical" size="large" onFinish={onFinish}>
-          <FormSection title="General Info">
-            <Form.Item name="outreachDate" label="date of outreach" rules={[{ required: true,},]} >
-              <DatePicker required format="MM/DD/YYYY" />
+      <>
+        {alert && (
+          <Alert message={alert.message} type={alert.type} banner="true" closable="true" showIcon="false" />
+        )}
+
+        <Container>
+          <Form form={form} layout="vertical" size="large" onFinish={onFinish}>
+            <FormSection title="General Info">
+              <Form.Item name="outreachDate" label="date of outreach" rules={[{ required: true,},]} >
+                <DatePicker required format="MM/DD/YYYY" />
+              </Form.Item>
+
+              <Form.Item name="outreachType" label="Type of outreach" rules={[{ required: true,},]} >
+                <Select placeholder="Type of outreach">
+                  <Option value="Fixed Site">Fixed Site</Option>
+                  <Option value="Mobile Foot">Mobile Foot</Option>
+                  <Option value="Mobile Bicyle">Mobile Bicyle</Option>
+                  <Option value="Individual/Co-Op Outreach">Individual/Co-Op Outreach</Option>
+                </Select>
+              </Form.Item>
+            </FormSection>
+
+            <FormSection title="Syringes">
+              <Form.Item name="numNeedles" label="Total # of Syringes" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Syringes" />
+              </Form.Item>
+
+              <Form.Item name="numPeopleReceivedSyringes" label="Total # of People Who Got Syringes" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Who Got Syringes" />
+              </Form.Item>
+            </FormSection>
+
+            <FormSection title="Naloxone">
+              <Form.Item name="numNaloxone" label="Total # of Naloxone" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Naloxone" />
+              </Form.Item>
+
+              <Form.Item name="numUsedNaloxone" label="Total # of Used Naloxone" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Used Naloxone" />
+              </Form.Item>
+
+              <Form.Item name="numUsedNaloxoneFromPPOP" label="Total # of Most Recently Used Naloxone That Came from PPOP" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Most Recently Used Naloxone That Came from PPOP" />
+              </Form.Item>
+
+              <Form.Item name="numPeopleLived" label="Total # of People Who Lived" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Who Lived" />
+              </Form.Item>
+
+              <Form.Item name="numLivedFromPPOP" label="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" />
+              </Form.Item>
+
+              <Form.Item name="numNaloxoneTrainings" label="Total # of People Trained to Use Naloxone" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Trained to Use Naloxone" />
+              </Form.Item>
+            </FormSection>
+
+            <FormSection title="Meth pipes">
+              <Form.Item name="numMethPipes" label="Total # of Meth Pipes" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Meth Pipes" />
+              </Form.Item>
+
+              <Form.Item name="numPeopleTurnedDownMethPipes" label="Total # of People Who Were Turned Down for a Meth Pipe" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Who Were Turned Down for a Meth Pipe" />
+              </Form.Item>
+            </FormSection>
+
+            <FormSection title="Other">
+              <Form.Item name="numSnortingKits" label="Total # of Snorting Kits Distributed" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Snorting Kits Distributed" />
+              </Form.Item>
+
+              <Form.Item name="numWoundCare" label="Total # of Wound Care Kits Distributed" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Wound Care Kits Distributed" />
+              </Form.Item>
+
+              <Form.Item name="numPeople" label="Total # of People" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People" />
+              </Form.Item>
+
+              <Form.Item name="numPolice" label="Total # of Police" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Police" />
+              </Form.Item>
+            </FormSection>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
             </Form.Item>
+          </Form>
 
-            <Form.Item name="outreachType" label="Type of outreach" rules={[{ required: true,},]} >
-              <Select placeholder="Type of outreach">
-                <Option value="Fixed Site">Fixed Site</Option>
-                <Option value="Mobile Foot">Mobile Foot</Option>
-                <Option value="Mobile Bicyle">Mobile Bicyle</Option>
-                <Option value="Individual/Co-Op Outreach">Individual/Co-Op Outreach</Option>
-              </Select>
-            </Form.Item>
-          </FormSection>
-
-          <FormSection title="Syringes">
-            <Form.Item name="numNeedles" label="Total # of Syringes" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Syringes" />
-            </Form.Item>
-
-            <Form.Item name="numPeopleReceivedSyringes" label="Total # of People Who Got Syringes" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of People Who Got Syringes" />
-            </Form.Item>
-          </FormSection>
-
-          <FormSection title="Naloxone">
-            <Form.Item name="numNaloxone" label="Total # of Naloxone" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Naloxone" />
-            </Form.Item>
-
-            <Form.Item name="numUsedNaloxone" label="Total # of Used Naloxone" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Used Naloxone" />
-            </Form.Item>
-
-            <Form.Item name="numUsedNaloxoneFromPPOP" label="Total # of Most Recently Used Naloxone That Came from PPOP" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Most Recently Used Naloxone That Came from PPOP" />
-            </Form.Item>
-
-            <Form.Item name="numPeopleLived" label="Total # of People Who Lived" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of People Who Lived" />
-            </Form.Item>
-
-            <Form.Item name="numLivedFromPPOP" label="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" />
-            </Form.Item>
-
-            <Form.Item name="numNaloxoneTrainings" label="Total # of People Trained to Use Naloxone" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of People Trained to Use Naloxone" />
-            </Form.Item>
-          </FormSection>
-
-          <FormSection title="Meth pipes">
-            <Form.Item name="numMethPipes" label="Total # of Meth Pipes" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Meth Pipes" />
-            </Form.Item>
-
-            <Form.Item name="numPeopleTurnedDownMethPipes" label="Total # of People Who Were Turned Down for a Meth Pipe" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of People Who Were Turned Down for a Meth Pipe" />
-            </Form.Item>
-          </FormSection>
-
-          <FormSection title="Other">
-            <Form.Item name="numSnortingKits" label="Total # of Snorting Kits Distributed" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Snorting Kits Distributed" />
-            </Form.Item>
-
-            <Form.Item name="numWoundCare" label="Total # of Wound Care Kits Distributed" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Wound Care Kits Distributed" />
-            </Form.Item>
-
-            <Form.Item name="numPeople" label="Total # of People" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of People" />
-            </Form.Item>
-
-            <Form.Item name="numPolice" label="Total # of Police" rules={[{ required: true,},]} >
-              <InputNumber required placeholder="Total # of Police" />
-            </Form.Item>
-          </FormSection>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-
-        <Button onClick={signOutCTA}>Sign out</Button>
-      </Container>
+          <Button onClick={signOutCTA}>Sign out</Button>
+        </Container>
+      </>
     )}
 
     {isSignedIn === false && (

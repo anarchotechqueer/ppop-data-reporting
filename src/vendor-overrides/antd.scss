@@ -51,7 +51,7 @@
 .ant-alert {
   .ant-alert-message {
     font-size: 1.2rem;
-    color: white;
+    color: $color-dark;
   }
 
   .ant-alert-close-icon {
@@ -59,7 +59,7 @@
     line-height: 1;
 
     svg {
-      fill: white;
+      fill: $color-dark;
     }
   }
 }

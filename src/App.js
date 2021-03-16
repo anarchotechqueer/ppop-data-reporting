@@ -12,6 +12,7 @@ const { Option } = Select;
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [showLoadingScreen, setShowLoadingScreen] = useState(true);
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -19,7 +20,6 @@ function App() {
     const formattedOutreachDate = outreachDate.format("MM/DD/YYYY");
 
     const submitValues = [formattedOutreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numSnortingKits, numWoundCare, numPolice];
-
     const params = {
       // The ID of the spreadsheet to update.
       spreadsheetId: process.env.REACT_APP_SPREADSHEET_ID,
@@ -36,17 +36,18 @@ function App() {
       'values': [submitValues] //convert the object's values to an array
     };
 
+    setShowLoadingScreen(true);
+
     let request = gapi.client.sheets.spreadsheets.values.append(params, valueRangeBody);
     request.then(function (response) {
-      // TODO: Insert desired response behaviour on submission
-      console.log(response.result);
-      // form.resetFields();
-
+      form.resetFields();
       setAlert({'type': 'success', 'message': 'Form submitted successfully'});
+      setShowLoadingScreen(false);
 
     }, function (reason) {
       console.error('error: ' + reason.result.error.message);
       setAlert({'type': 'error', 'message': reason.result.error.message});
+      setShowLoadingScreen(false);
     });
   };
 
@@ -56,6 +57,7 @@ function App() {
 
   const updateSignInStatus = (signedIn) => {
     setIsSignedIn(signedIn);
+    setShowLoadingScreen(false);
   };
 
   const signInCTA = (e) => {
@@ -69,6 +71,12 @@ function App() {
 
     gapi.auth2.getAuthInstance().signOut();
     updateSignInStatus(false);
+  }
+
+  const closeAlert = (e) => {
+    e.preventDefault();
+
+    setAlert(null);
   }
 
   const initClient =()=> { //provide the authentication credentials you set up in the Google developer console
@@ -92,7 +100,7 @@ function App() {
     {isSignedIn && (
       <>
         {alert && (
-          <Alert message={alert.message} type={alert.type} banner="true" closable="true" showIcon="false" />
+          <Alert message={alert.message} type={alert.type} banner="true" closable="true" showIcon="false" onClose={closeAlert}/>
         )}
 
         <Container>
@@ -188,7 +196,7 @@ function App() {
       </>
     )}
 
-    {isSignedIn === false && (
+    {!isSignedIn && (
       <SignInScreen>
         <Button type="primary" onClick={signInCTA}>
           Sign In
@@ -196,7 +204,7 @@ function App() {
       </SignInScreen>
     )}
 
-    {isSignedIn === null && (
+    {showLoadingScreen && (
       <LoadingScreen />
     )}
     </>

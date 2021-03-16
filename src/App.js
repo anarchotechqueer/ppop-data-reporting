@@ -122,65 +122,65 @@ function App() {
 
             <FormSection title="Syringes">
               <Form.Item name="numNeedles" label="Total # of Syringes" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Syringes" />
+                <InputNumber required placeholder="Total # of Syringes" min="0"/>
               </Form.Item>
 
               <Form.Item name="numPeopleReceivedSyringes" label="Total # of People Who Got Syringes" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People Who Got Syringes" />
+                <InputNumber required placeholder="Total # of People Who Got Syringes" min="0"/>
               </Form.Item>
             </FormSection>
 
             <FormSection title="Naloxone">
               <Form.Item name="numNaloxone" label="Total # of Naloxone" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Naloxone" />
+                <InputNumber required placeholder="Total # of Naloxone" min="0"/>
               </Form.Item>
 
               <Form.Item name="numUsedNaloxone" label="Total # of Used Naloxone" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Used Naloxone" />
+                <InputNumber required placeholder="Total # of Used Naloxone" min="0"/>
               </Form.Item>
 
               <Form.Item name="numUsedNaloxoneFromPPOP" label="Total # of Most Recently Used Naloxone That Came from PPOP" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Most Recently Used Naloxone That Came from PPOP" />
+                <InputNumber required placeholder="Total # of Most Recently Used Naloxone That Came from PPOP" min="0"/>
               </Form.Item>
 
               <Form.Item name="numPeopleLived" label="Total # of People Who Lived" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People Who Lived" />
+                <InputNumber required placeholder="Total # of People Who Lived" min="0"/>
               </Form.Item>
 
               <Form.Item name="numLivedFromPPOP" label="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" />
+                <InputNumber required placeholder="Total # of Times that the Most Recently Used Naloxone that Came from PPOP Resulted in Survival" min="0"/>
               </Form.Item>
 
               <Form.Item name="numNaloxoneTrainings" label="Total # of People Trained to Use Naloxone" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People Trained to Use Naloxone" />
+                <InputNumber required placeholder="Total # of People Trained to Use Naloxone" min="0"/>
               </Form.Item>
             </FormSection>
 
             <FormSection title="Meth pipes">
               <Form.Item name="numMethPipes" label="Total # of Meth Pipes" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Meth Pipes" />
+                <InputNumber required placeholder="Total # of Meth Pipes" min="0"/>
               </Form.Item>
 
               <Form.Item name="numPeopleTurnedDownMethPipes" label="Total # of People Who Were Turned Down for a Meth Pipe" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People Who Were Turned Down for a Meth Pipe" />
+                <InputNumber required placeholder="Total # of People Who Were Turned Down for a Meth Pipe" min="0"/>
               </Form.Item>
             </FormSection>
 
             <FormSection title="Other">
               <Form.Item name="numSnortingKits" label="Total # of Snorting Kits Distributed" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Snorting Kits Distributed" />
+                <InputNumber required placeholder="Total # of Snorting Kits Distributed" min="0"/>
               </Form.Item>
 
               <Form.Item name="numWoundCare" label="Total # of Wound Care Kits Distributed" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Wound Care Kits Distributed" />
+                <InputNumber required placeholder="Total # of Wound Care Kits Distributed" min="0"/>
               </Form.Item>
 
               <Form.Item name="numPeople" label="Total # of People" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People" />
+                <InputNumber required placeholder="Total # of People" min="0"/>
               </Form.Item>
 
               <Form.Item name="numPolice" label="Total # of Police" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of Police" />
+                <InputNumber required placeholder="Total # of Police" min="0"/>
               </Form.Item>
             </FormSection>
 

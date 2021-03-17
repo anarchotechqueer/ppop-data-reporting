@@ -16,10 +16,10 @@ function App() {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const {outreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numSnortingKits, numWoundCare, numPolice} = values;
+    const {outreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numCrackPipes, numPeopleTurnedDownCrackPipes, numSnortingKits, numWoundCare, numPolice} = values;
     const formattedOutreachDate = outreachDate.format("MM/DD/YYYY");
 
-    const submitValues = [formattedOutreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numSnortingKits, numWoundCare, numPolice];
+    const submitValues = [formattedOutreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numCrackPipes, numPeopleTurnedDownCrackPipes, numSnortingKits, numWoundCare, numPolice];
     const params = {
       // The ID of the spreadsheet to update.
       spreadsheetId: process.env.REACT_APP_SPREADSHEET_ID,
@@ -156,13 +156,21 @@ function App() {
               </Form.Item>
             </FormSection>
 
-            <FormSection title="Meth pipes">
+            <FormSection title="Pipes">
               <Form.Item name="numMethPipes" label="Total # of Meth Pipes" rules={[{ required: true,},]} >
                 <InputNumber required placeholder="Total # of Meth Pipes" min="0" type="number" />
               </Form.Item>
 
-              <Form.Item name="numPeopleTurnedDownMethPipes" label="Total # of People Who Were Turned Down for a Meth Pipe" rules={[{ required: true,},]} >
-                <InputNumber required placeholder="Total # of People Who Were Turned Down for a Meth Pipe" min="0" type="number" />
+              <Form.Item name="numPeopleTurnedDownMethPipes" label="Total # of People Who Asked for a Meth Pipe and didn't Get One" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Who Asked for a Meth Pipe and didn't Get One" min="0" type="number" />
+              </Form.Item>
+
+              <Form.Item name="numCrackPipes" label="Total # of Crack Pipes" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of Crack Pipes" min="0" type="number" />
+              </Form.Item>
+
+              <Form.Item name="numPeopleTurnedDownCrackPipes" label="Total # of People Who Asked for a Crack Pipe and didn't Get One" rules={[{ required: true,},]} >
+                <InputNumber required placeholder="Total # of People Who Asked for a Crack Pipe and didn't Get One" min="0" type="number" />
               </Form.Item>
             </FormSection>
 
@@ -193,7 +201,8 @@ function App() {
             </FormSection>
           </Form>
 
-          {//<Button onClick={signOutCTA}>Sign out</Button>
+          {
+            //<Button onClick={signOutCTA}>Sign out</Button>
           }
         </Container>
       </>

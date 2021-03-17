@@ -100,7 +100,7 @@ function App() {
     {isSignedIn && (
       <>
         {alert && (
-          <Alert message={alert.message} type={alert.type} banner="true" closable="true" showIcon="false" onClose={closeAlert}/>
+          <Alert message={alert.message} type={alert.type} banner closable showIcon={false} onClose={closeAlert}/>
         )}
 
         <Container>

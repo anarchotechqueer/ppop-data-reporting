@@ -24,7 +24,7 @@ function App() {
       // The ID of the spreadsheet to update.
       spreadsheetId: process.env.REACT_APP_SPREADSHEET_ID,
       // The A1 notation of a range to search for a logical table of data.Values will be appended after the last row of the table.
-      range: 'Sheet1', //this is the default spreadsheet name, so unless you've changed it, or are submitting to multiple sheets, you can leave this
+      range: process.env.REACT_APP_SHEET_NAME, //this is the default spreadsheet name, so unless you've changed it, or are submitting to multiple sheets, you can leave this
       // How the input data should be interpreted.
       valueInputOption: 'USER_ENTERED', //RAW = if no conversion or formatting of submitted data is needed. Otherwise USER_ENTERED
       // How the input data should be inserted.

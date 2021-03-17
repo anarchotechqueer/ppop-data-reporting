@@ -57,12 +57,12 @@ function App() {
     gapi.auth2.getAuthInstance().signIn();
   };
 
-  const signOutCTA = (e) => {
-    e.preventDefault();
-
-    gapi.auth2.getAuthInstance().signOut();
-    updateSignInStatus(false);
-  }
+  // const signOutCTA = (e) => {
+  //   e.preventDefault();
+  //
+  //   gapi.auth2.getAuthInstance().signOut();
+  //   updateSignInStatus(false);
+  // }
 
   const closeAlert = (e) => {
     e.preventDefault();
@@ -184,14 +184,17 @@ function App() {
               </Form.Item>
             </FormSection>
 
-            <Form.Item>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
+            <FormSection>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </FormSection>
           </Form>
 
-          <Button onClick={signOutCTA}>Sign out</Button>
+          {//<Button onClick={signOutCTA}>Sign out</Button>
+          }
         </Container>
       </>
     )}

@@ -2,9 +2,11 @@
 
 .container {
   width: 100%;
-  padding: $space-big $space-double;
+  padding-left: $space-double;
+  padding-right: $space-double;
 
   @media (min-width: $screen-wide) {
-    padding: $space-big;
+    padding-left: $space-big;
+    padding-right: $space-big;
   }
 }

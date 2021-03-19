@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Button, Select, DatePicker, InputNumber, Alert} from 'antd';
-
 import { gapi } from "gapi-script";
+import { dateFormat } from './lib';
+
 
 import Header from './components/header';
 import Container from './components/container';
@@ -20,7 +21,7 @@ function App() {
 
   const onFinish = (values) => {
     const {outreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numSnortingKits, numWoundCare, numPolice} = values;
-    const formattedOutreachDate = outreachDate.format("MM/DD/YYYY");
+    const formattedOutreachDate = outreachDate.format(dateFormat);
 
     const submitValues = [formattedOutreachDate, outreachType, numNeedles, numPeopleReceivedSyringes, numPeople, numNaloxone, numUsedNaloxone, numUsedNaloxoneFromPPOP, numPeopleLived, numLivedFromPPOP, numNaloxoneTrainings, numMethPipes, numPeopleTurnedDownMethPipes, numSnortingKits, numWoundCare, numPolice];
     const params = {
@@ -113,7 +114,7 @@ function App() {
             <Form form={form} layout="vertical" size="large" onFinish={onFinish}>
               <FormSection title="General Info">
                 <Form.Item name="outreachDate" label="Date of outreach" rules={[{ required: true,},]} >
-                  <DatePicker required format="MM/DD/YYYY" placeholder="Date of outreach" />
+                  <DatePicker required format={dateFormat} placeholder="Date of outreach" />
                 </Form.Item>
 
                 <Form.Item name="outreachType" label="Type of outreach" rules={[{ required: true,},]} >

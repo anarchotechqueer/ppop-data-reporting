@@ -7,7 +7,7 @@ export default function Header({ children }) {
     <header className={styles.header}>
     <Container>
       <div className={styles.title}>
-        PPOP Data Reporting
+        PPOP Stats Reporting
       </div>
     </Container>
     </header>

@@ -6,7 +6,7 @@ export default function SignInScreen({title, children}) {
   return (
     <section className={styles.signInScreen}>
       <Container className={styles.container}>
-        <div className={styles.title}>PPOP Data Reporting</div>
+        <div className={styles.title}>PPOP Stats Reporting</div>
         <div className={styles.content}>
           {children}
         </div>

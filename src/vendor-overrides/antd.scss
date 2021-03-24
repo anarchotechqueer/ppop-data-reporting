@@ -24,18 +24,32 @@
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: rgba(#fff, .7);
+  border-color: currentColor;
 
   padding: $space-half $space-double;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    border-color: currentColor;
+  }
+
+  &.ant-btn-sm {
+    padding: $space-half $space;
+    font-size: .9rem;
+  }
 }
 
 .ant-btn-primary {
+  color: #fff;
   background-color: $color-dark;
   border-color: $color-dark;
 
   &:hover,
   &:focus {
     background-color: $color-darker;
-    backround-color: $color-darker;
+    border-color: $color-darker;
   }
 }
 
